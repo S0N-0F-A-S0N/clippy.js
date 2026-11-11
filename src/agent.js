@@ -414,7 +414,9 @@ clippy.Agent.prototype = {
     },
 
     _updateLocation:function () {
-        this._el.css({top:this._targetY, left:this._targetX});
+        // native DOM manipulation for performance in high-frequency drag loop
+        this._el[0].style.top = this._targetY + 'px';
+        this._el[0].style.left = this._targetX + 'px';
         this._dragUpdateLoop = window.setTimeout($.proxy(this._updateLocation, this), 10);
     },
 

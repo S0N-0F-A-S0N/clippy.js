@@ -99,10 +99,12 @@ clippy.Animator.prototype = {
             if (i < images.length) {
                 var xy = images[i];
                 var bg = -xy[0] + 'px ' + -xy[1] + 'px';
-                this._overlays[i].css({'background-position':bg, 'display':'block'});
+                // native DOM manipulation for performance in animation loop
+                this._overlays[i][0].style.backgroundPosition = bg;
+                this._overlays[i][0].style.display = 'block';
             }
             else {
-                this._overlays[i].css('display', 'none');
+                this._overlays[i][0].style.display = 'none';
             }
 
         }
